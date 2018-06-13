@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <p>Component Demo</p>
     <mt-accordion
       title="Title"
