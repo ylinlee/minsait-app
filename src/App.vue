@@ -5,7 +5,7 @@
       title="Title"
       :initialExpandedItem="0"
       :items="demoItems">
-      <template slot-scope="demoItems">
+      <template slot="item" slot-scope="demoItems">
         {{ demoItems.item.text }}
       </template>
     </mt-accordion>
@@ -14,7 +14,7 @@
     <mt-accordion
       title="HTML"
       :items="textItems">
-      <template slot-scope="textItems">
+      <template slot="item" slot-scope="textItems">
         <button type="button">{{ textItems.item.buttonName }}</button>
         <input type="text" :placeholder="textItems.item.buttonName" />
       </template>
@@ -25,8 +25,8 @@
       title="Link"
       :initialExpandedItem="2"
       :items="linkItems">
-      <template slot-scope="linkItems">
-        <a 
+      <template slot="item" slot-scope="linkItems">
+        <a
           :href="linkItems.item.linkUrl"
           class="mt-accordion__vue-link--color-green">
           {{ linkItems.item.linkName }}</a>
@@ -37,7 +37,7 @@
     <mt-accordion
       title="Component"
       :items="messageItems">
-      <template slot-scope="messageItems">
+      <template slot="item" slot-scope="messageItems">
         <hello-world :msg="messageItems.item.message" />
       </template>
     </mt-accordion>
@@ -47,7 +47,6 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import MtAccordion from './components/mt-accordion.vue'
-
 
 export default {
   name: 'app',

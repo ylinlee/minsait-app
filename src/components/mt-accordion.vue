@@ -4,6 +4,7 @@
     <div
       v-for="item in accordionItems"
       :key=item.id
+      :class="item.className"
       class="mt-item mt-item--border-bottom"
     >
       <i
@@ -17,12 +18,11 @@
         class="mt-label mt-label--align-left mt-label--margin"
         @click="onLabelClick(item)">
         {{ item.label || 'DefaultLabel' }}</label>
-      <div
-        :class="{ 
-          'mt-slot-wrapper mt-slot-wrapper--padding': true,
-          'mt-slot-wrapper--hidden': !item.isExpanded
-        }">
-        <slot :item="item"></slot>
+      <div 
+        v-if="item.isExpanded"
+        class="mt-slot-wrapper mt-slot-wrapper--padding"
+      >
+        <slot name="item" :item="item"></slot>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@ export default {
     items: {
       type: Array,
       default: () => {
-        return [];
+        return []
       }
     },
     initialExpandedItem: {
@@ -55,8 +55,10 @@ export default {
   created () {
     this.accordionItems = this.items.map((item, index) => {
       return {
-        ...item, ...{
+        ...item,
+        ...{
           id: index,
+          className: `mt-item-${index}`,
           isExpanded: this.initialExpandedItem === index
         }
       }
@@ -140,10 +142,6 @@ export default {
   }
 }
 .mt-slot-wrapper {
-  display: block;
-  &--hidden {
-    display: none;
-  }
   &--padding {
     padding: 11px 18px 27px 22px;
   }
